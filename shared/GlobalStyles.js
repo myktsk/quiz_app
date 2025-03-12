@@ -27,7 +27,7 @@ export const globalStyles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
-    marginVertical: 20,
+    marginVertical: 8,
     justifyContent: "center",
     alignItems: "center",
   },
