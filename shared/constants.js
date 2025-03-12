@@ -8,8 +8,12 @@ export const COLORS = {
   BACKGROUND: "#F0EEF6",
   BORDER: "#E0DFDF",
   TEXT: "#272B3F",
+  TEXT_LIGHT: "#7C7C7C",
   WHITE: "#FFFFFF",
   PRIMARY: "#875CFF",
+  SUCCESS: "#00C48C",
+  WARNING: "#FFB800",
+  DANGER: "#FF3D71",
 };
 
 // Refer: https://opentdb.com/api_config.php
