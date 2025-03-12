@@ -21,4 +21,19 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 20,
     color: COLORS.TEXT,
   },
+  primaryButton: {
+    width: "100%",
+    backgroundColor: COLORS.PRIMARY,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    marginVertical: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    color: COLORS.WHITE,
+    fontWeight: "bold",
+    fontSize: 16,
+  },
 });

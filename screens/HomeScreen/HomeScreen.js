@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 import { globalStyles } from "../../shared/GlobalStyles";
-import { COLORS, QUIZ_CATEGORIES } from "../../shared/constants";
+import { COLORS, QUIZ_CATEGORIES, ROUTES } from "../../shared/constants";
 
 const categoryIcons = {
   "question-mark": require("../../assets/category-icons/question-mark.png"),
@@ -80,6 +80,15 @@ export const HomeScreen = ({ navigation }) => {
           keyExtractor={(item) => item.value}
         />
       </View>
+      <TouchableOpacity
+        style={globalStyles.primaryButton}
+        onPress={() => {
+          navigation.navigate(ROUTES.QUIZ, { category: selectedCategory });
+        }}
+        disabled={!selectedCategory}
+      >
+        <Text style={globalStyles.buttonText}>Start Quiz</Text>
+      </TouchableOpacity>
     </View>
   );
 };
