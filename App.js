@@ -1,15 +1,16 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, ROUTES } from "./shared/constants";
 import { HomeScreen } from "./screens/HomeScreen/HomeScreen";
 import { QuizScreen } from "./screens/QuizScreen/QuizScreen";
 import { ScoreBoardScreen } from "./screens/ScoreBoardScreen/ScoreBoardScreen";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
 const RootStack = () => {
+  const navigation = useNavigation();
   return (
     <Stack.Navigator
       initialRouteName={ROUTES.HOME}
@@ -18,6 +19,15 @@ const RootStack = () => {
           backgroundColor: COLORS.BACKGROUND,
         },
         headerTintColor: COLORS.TEXT,
+        headerRight: () => (
+          <TouchableOpacity
+            onPress={() => navigation.navigate(ROUTES.SCORE_BOARD)}
+          >
+            <Text style={{ color: COLORS.TEXT, marginRight: 10 }}>
+              Score Board
+            </Text>
+          </TouchableOpacity>
+        ),
       }}
     >
       <Stack.Screen name={ROUTES.HOME} component={HomeScreen} />
