@@ -1,11 +1,13 @@
+import { Provider } from "react-redux";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { store } from "./redux/store";
 import { COLORS, ROUTES } from "./shared/constants";
 import { HomeScreen } from "./screens/HomeScreen/HomeScreen";
 import { QuizScreen } from "./screens/QuizScreen/QuizScreen";
 import { ScoreBoardScreen } from "./screens/ScoreBoardScreen/ScoreBoardScreen";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,13 +41,15 @@ const RootStack = () => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <SafeAreaProvider>
-        <SafeAreaView style={styles.safeArea}>
-          <RootStack />
-        </SafeAreaView>
-      </SafeAreaProvider>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <SafeAreaProvider>
+          <SafeAreaView style={styles.safeArea}>
+            <RootStack />
+          </SafeAreaView>
+        </SafeAreaProvider>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

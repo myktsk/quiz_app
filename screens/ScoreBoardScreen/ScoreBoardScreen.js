@@ -1,42 +1,26 @@
-import { useState } from "react";
-import { format, set } from "date-fns";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FlatList,
   Image,
   StyleSheet,
   Text,
-  Touchable,
   TouchableOpacity,
   View,
 } from "react-native";
 import { globalStyles } from "../../shared/GlobalStyles";
 import { COLORS, QUIZ_CATEGORIES } from "../../shared/constants";
 import { categoryIcons } from "../../shared/icons";
+import { fetchScores } from "../../redux/actions";
 
 export const ScoreBoardScreen = ({ navigation }) => {
-  //TODO: make this dynamic
-  const [results, setResults] = useState([
-    {
-      datetime: new Date(),
-      category: QUIZ_CATEGORIES[1].value,
-      score: 5,
-    },
-    {
-      datetime: new Date(),
-      category: QUIZ_CATEGORIES[2].value,
-      score: 8,
-    },
-    {
-      datetime: new Date(),
-      category: QUIZ_CATEGORIES[3].value,
-      score: 7,
-    },
-    {
-      datetime: new Date(),
-      category: QUIZ_CATEGORIES[4].value,
-      score: 2,
-    },
-  ]);
+  const dispatch = useDispatch();
+  const scores = useSelector((state) => state.scores.scores);
+
+  useEffect(() => {
+    const subscription = dispatch(fetchScores());
+    return () => subscription;
+  }, []);
 
   return (
     <View style={globalStyles.screenWrapper}>
@@ -44,7 +28,7 @@ export const ScoreBoardScreen = ({ navigation }) => {
         <Text style={globalStyles.sectionTitle}>Your Scores</Text>
       </View>
       <View style={styles.resultsContainer}>
-        {results.length === 0 ? (
+        {scores.length === 0 ? (
           <Text
             style={{
               color: COLORS.TEXT,
@@ -55,7 +39,7 @@ export const ScoreBoardScreen = ({ navigation }) => {
         ) : (
           <FlatList
             style={{ width: "100%" }}
-            data={results}
+            data={scores}
             renderItem={({ item }) => {
               const category = QUIZ_CATEGORIES.find(
                 (category) => category.value === item.category
@@ -84,7 +68,7 @@ export const ScoreBoardScreen = ({ navigation }) => {
                       <Text style={styles.listItemText}>/10</Text>
                     </View>
                     <Text style={styles.listItemText}>
-                      Date: {format(item.datetime, "yyyy-MM-dd HH:mm")}
+                      Finished At: {item.created_at}
                     </Text>
                   </View>
                 </View>
@@ -93,7 +77,7 @@ export const ScoreBoardScreen = ({ navigation }) => {
             keyExtractor={(item) => item.category}
           />
         )}
-        {results.length > 0 && (
+        {scores.length > 0 && (
           <TouchableOpacity
             style={globalStyles.primaryButton}
             onPress={() => setResults([])}
