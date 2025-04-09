@@ -27,7 +27,7 @@ export const ScoreBoardScreen = ({ navigation }) => {
       <View style={globalStyles.sectionHeader}>
         <Text style={globalStyles.sectionTitle}>Your Scores</Text>
       </View>
-      <View style={styles.resultsContainer}>
+      <View style={globalStyles.contentContainer}>
         {scores.length === 0 ? (
           <Text
             style={{
@@ -48,7 +48,7 @@ export const ScoreBoardScreen = ({ navigation }) => {
                 <View style={styles.listItem}>
                   <Image
                     source={categoryIcons[category.icon]}
-                    style={styles.categoryIcon}
+                    style={globalStyles.categoryIcon}
                   />
                   <View style={styles.listItemContent}>
                     <Text style={styles.listItemTitle}>{category.label}</Text>
@@ -74,7 +74,7 @@ export const ScoreBoardScreen = ({ navigation }) => {
                 </View>
               );
             }}
-            keyExtractor={(item) => item.category}
+            keyExtractor={(item) => item.created_at}
           />
         )}
         {scores.length > 0 && (
@@ -91,12 +91,6 @@ export const ScoreBoardScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  resultsContainer: {
-    flex: 1,
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   listItem: {
     flexDirection: "row",
     alignItems: "center",
@@ -106,11 +100,6 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: COLORS.WHITE,
     borderRadius: 8,
-  },
-  categoryIcon: {
-    width: 28,
-    height: 28,
-    margin: 8,
   },
   listItemContent: {
     flex: 1,

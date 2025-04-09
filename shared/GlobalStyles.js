@@ -36,4 +36,15 @@ export const globalStyles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
   },
+  contentContainer: {
+    flex: 1,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  categoryIcon: {
+    width: 28,
+    height: 28,
+    margin: 8,
+  },
 });

@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import {
   addDoc,
   collection,
@@ -5,22 +6,24 @@ import {
   doc,
   onSnapshot,
   updateDoc,
+  Timestamp
 } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 import { ADD_SCORE, DELETE_SCORE, FETCH_SCORES } from "./actionTypes";
-import { format } from "date-fns";
 
 const scoresCollection = "scores";
 const collectionRef = collection(db, scoresCollection);
 
 export const addScore = (score) => async (dispatch) => {
   try {
-    const docRef = await addDoc(collectionRef, score);
+
+    const docRef = await addDoc(collectionRef, {...score, created_at: Timestamp.now()});
     dispatch({
       type: ADD_SCORE,
       payload: {
         id: docRef.id,
         ...score,
+        created_at: format(new Date(), "MMM d, y p"),
       },
     });
   } catch (error) {

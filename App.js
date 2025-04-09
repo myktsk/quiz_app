@@ -8,6 +8,7 @@ import { COLORS, ROUTES } from "./shared/constants";
 import { HomeScreen } from "./screens/HomeScreen/HomeScreen";
 import { QuizScreen } from "./screens/QuizScreen/QuizScreen";
 import { ScoreBoardScreen } from "./screens/ScoreBoardScreen/ScoreBoardScreen";
+import { ResultScreen } from "./screens/ResultScreen/ResultScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,7 @@ const RootStack = () => {
     >
       <Stack.Screen name={ROUTES.HOME} component={HomeScreen} />
       <Stack.Screen name={ROUTES.QUIZ} component={QuizScreen} />
+      <Stack.Screen name={ROUTES.RESULT} component={ResultScreen} />
       <Stack.Screen name={ROUTES.SCORE_BOARD} component={ScoreBoardScreen} />
     </Stack.Navigator>
   );

@@ -96,7 +96,7 @@ export const QuizScreen = ({ navigation }) => {
     if (count < 9) {
       return;
     }
-    navigation.navigate(ROUTES.SCORE_BOARD, {
+    navigation.navigate(ROUTES.RESULT, {
       category: category,
       correctCount: correctCount,
     });
