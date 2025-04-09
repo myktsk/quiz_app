@@ -8,7 +8,7 @@ export const globalStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 28,
-    paddingVertical: 80,
+    paddingVertical: 40,
   },
   sectionHeader: {
     width: "100%",

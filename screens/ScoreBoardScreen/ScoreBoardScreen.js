@@ -7,15 +7,38 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Alert,
 } from "react-native";
 import { globalStyles } from "../../shared/GlobalStyles";
-import { COLORS, QUIZ_CATEGORIES } from "../../shared/constants";
+import { COLORS, QUIZ_CATEGORIES, ROUTES } from "../../shared/constants";
 import { categoryIcons } from "../../shared/icons";
-import { fetchScores } from "../../redux/actions";
+import { deleteScore, fetchScores } from "../../redux/actions";
 
 export const ScoreBoardScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const scores = useSelector((state) => state.scores.scores);
+
+  const confirmAndReset = () => {
+    Alert.alert(
+      "Reset Scores",
+      "Are you sure you want to reset the scores? This action cannot be undone.",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            scores.forEach((score) => {
+              dispatch(deleteScore(score.id));
+            });
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
 
   useEffect(() => {
     const subscription = dispatch(fetchScores());
@@ -78,13 +101,18 @@ export const ScoreBoardScreen = ({ navigation }) => {
           />
         )}
         {scores.length > 0 && (
-          <TouchableOpacity
-            style={globalStyles.primaryButton}
-            onPress={() => setResults([])}
-          >
-            <Text style={globalStyles.buttonText}>Reset Scores</Text>
+          <TouchableOpacity onPress={confirmAndReset}>
+            <Text style={{ color: COLORS.DANGER }}>Reset Scores</Text>
           </TouchableOpacity>
         )}
+        <TouchableOpacity
+          style={[globalStyles.primaryButton, { marginTop: 16 }]}
+          onPress={() => {
+            navigation.navigate(ROUTES.HOME);
+          }}
+        >
+          <Text style={globalStyles.buttonText}>Start Quiz</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

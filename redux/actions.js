@@ -6,7 +6,7 @@ import {
   doc,
   onSnapshot,
   updateDoc,
-  Timestamp
+  Timestamp,
 } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 import { ADD_SCORE, DELETE_SCORE, FETCH_SCORES } from "./actionTypes";
@@ -16,8 +16,11 @@ const collectionRef = collection(db, scoresCollection);
 
 export const addScore = (score) => async (dispatch) => {
   try {
+    const docRef = await addDoc(collectionRef, {
+      ...score,
+      created_at: Timestamp.now(),
+    });
 
-    const docRef = await addDoc(collectionRef, {...score, created_at: Timestamp.now()});
     dispatch({
       type: ADD_SCORE,
       payload: {
@@ -55,21 +58,6 @@ export const fetchScores = () => async (dispatch) => {
     return subscription;
   } catch (error) {
     console.error("Error fetching scores: ", error);
-  }
-};
-
-export const editScore = (updatedScore) => async (dispatch) => {
-  try {
-    const docRef = doc(collectionRef, updatedScore.id);
-    const { id, ...updatedData } = updatedScore;
-    await updateDoc(docRef, updatedData);
-
-    dispatch({
-      type: EDIT_SCORE,
-      payload: updatedScore,
-    });
-  } catch (error) {
-    console.error("Error updating score: ", error);
   }
 };
 
