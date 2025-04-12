@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   FlatList,
   Image,
@@ -8,11 +8,11 @@ import {
   TouchableOpacity,
   View,
   Alert,
-} from "react-native";
-import { globalStyles } from "../../shared/GlobalStyles";
-import { COLORS, QUIZ_CATEGORIES, ROUTES } from "../../shared/constants";
-import { categoryIcons } from "../../shared/icons";
-import { deleteScore, fetchScores } from "../../redux/actions";
+} from 'react-native';
+import { globalStyles } from '../../shared/GlobalStyles';
+import { COLORS, QUIZ_CATEGORIES, ROUTES } from '../../shared/constants';
+import { categoryIcons } from '../../shared/icons';
+import { deleteScore, fetchScores } from '../../redux/actions';
 
 export const ScoreBoardScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -20,15 +20,15 @@ export const ScoreBoardScreen = ({ navigation }) => {
 
   const confirmAndReset = () => {
     Alert.alert(
-      "Reset Scores",
-      "Are you sure you want to reset the scores? This action cannot be undone.",
+      'Reset Scores',
+      'Are you sure you want to reset the scores? This action cannot be undone.',
       [
         {
-          text: "Cancel",
-          style: "cancel",
+          text: 'Cancel',
+          style: 'cancel',
         },
         {
-          text: "OK",
+          text: 'OK',
           onPress: () => {
             scores.forEach((score) => {
               dispatch(deleteScore(score.id));
@@ -61,7 +61,7 @@ export const ScoreBoardScreen = ({ navigation }) => {
           </Text>
         ) : (
           <FlatList
-            style={{ width: "100%" }}
+            style={{ width: '100%' }}
             data={scores}
             renderItem={({ item }) => {
               const category = QUIZ_CATEGORIES.find(
@@ -97,7 +97,7 @@ export const ScoreBoardScreen = ({ navigation }) => {
                 </View>
               );
             }}
-            keyExtractor={(item) => item.created_at}
+            keyExtractor={(item) => item.id}
           />
         )}
         {scores.length > 0 && (
@@ -120,12 +120,12 @@ export const ScoreBoardScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   listItem: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
     marginVertical: 8,
     padding: 16,
-    width: "100%",
+    width: '100%',
     backgroundColor: COLORS.WHITE,
     borderRadius: 8,
   },
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   listItemTitle: {
     fontSize: 14,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: COLORS.TEXT,
   },
   listItemText: {
@@ -144,11 +144,11 @@ const styles = StyleSheet.create({
   },
   scoreText: {
     fontSize: 14,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   scoreContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 4,
   },
 });
