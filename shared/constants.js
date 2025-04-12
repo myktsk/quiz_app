@@ -1,6 +1,7 @@
 export const ROUTES = {
   HOME: "Home",
   QUIZ: "Quiz",
+  RESULT: "Result",
   SCORE_BOARD: "ScoreBoard",
 };
 

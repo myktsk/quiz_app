@@ -8,7 +8,7 @@ export const globalStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 28,
-    paddingVertical: 80,
+    paddingVertical: 40,
   },
   sectionHeader: {
     width: "100%",
@@ -35,5 +35,16 @@ export const globalStyles = StyleSheet.create({
     color: COLORS.WHITE,
     fontWeight: "bold",
     fontSize: 16,
+  },
+  contentContainer: {
+    flex: 1,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  categoryIcon: {
+    width: 28,
+    height: 28,
+    margin: 8,
   },
 });
